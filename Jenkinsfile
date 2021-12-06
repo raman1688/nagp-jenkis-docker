@@ -23,9 +23,11 @@ pipeline {
             }
         }
         stage('docker build/push') {
-            script {
-                docker.withRegistry('https://index.docker.io/v1/', 'dockerhub') {
-                    def app = docker.build("raman1688/nagp-jenkins-docker:${commit_id}", '.').push()
+            steps {
+                script {
+                    docker.withRegistry('https://index.docker.io/v1/', 'dockerhub') {
+                        def app = docker.build("raman1688/nagp-jenkins-docker:${commit_id}", '.').push()
+                    }
                 }
             }
         }
