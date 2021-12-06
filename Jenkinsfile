@@ -1,9 +1,10 @@
+
+def commit_id
 pipeline {
     agent {
         label 'docker-agent'
     }
     stages {
-        def commit_id
         stage('Preparation') {
             steps {
                 checkout scm
