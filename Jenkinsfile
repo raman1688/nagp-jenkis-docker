@@ -8,8 +8,10 @@ pipeline {
         stage('Preparation') {
             steps {
                 checkout scm
-                sh "git rev-parse --short HEAD > .git/commit-id"                        
-                commit_id = readFile('.git/commit-id').trim()
+                sh "git rev-parse --short HEAD > .git/commit-id"
+                script {
+                    commit_id = readFile('.git/commit-id').trim()
+                }                   
             }
         }
         stage('test') {
@@ -21,8 +23,10 @@ pipeline {
             }
         }
         stage('docker build/push') {
-            docker.withRegistry('https://index.docker.io/v1/', 'dockerhub') {
-                def app = docker.build("raman1688/nagp-jenkins-docker:${commit_id}", '.').push()
+            script {
+                docker.withRegistry('https://index.docker.io/v1/', 'dockerhub') {
+                    def app = docker.build("raman1688/nagp-jenkins-docker:${commit_id}", '.').push()
+                }
             }
         }
     }
