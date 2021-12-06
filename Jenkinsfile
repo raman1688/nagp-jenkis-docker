@@ -1,5 +1,7 @@
 pipeline {
-    agent docker-agent
+    agent {
+        label 'docker-agent'
+    }
     def commit_id
     stages {
         stage('Preparation') {
