@@ -1,7 +1,8 @@
 var express = require('express');
 var app = express();
-var mysql = require("mysql");
+var mysql = require("mysql2");
 var con = mysql.createConnection({ host: process.env.MYSQL_HOST, user: process.env.MYSQL_USER, password: process.env.MYSQL_PASSWORD, database: process.env.MYSQL_DATABASE});
+// var con = mysql.createConnection({ host: 'localhost', user: 'root', password: 'password', database: 'myapp'});
 
 // mysql code
 
@@ -25,6 +26,13 @@ app.get('/', function (req, res) {
   });
 });
 
+app.get('/people', function (req, res) {
+  // create table if not exist
+  con.query('SELECT * from people', function(err, result) {
+    if(err) throw err;
+    res.send(result);
+  });
+});
 
 // server
 var server = app.listen(3000, function () {
