@@ -1,7 +1,9 @@
 # Project
 
 This is a project for nagp assignment for implementing CI CD pipeline using jenkins
+## Git repository URL
 
+https://github.com/raman1688/nagp-jenkis-docker
 ## Installation
 
 In order to run the application, following steps can be followed.
